@@ -12,8 +12,8 @@ public struct Keychain<Value> {
     
     public let key: String
     public let defaultValue: Value
-    public var container = Keychainer(serviceName: "\(Keychainer.self)")
-
+    public let container: Keychainer
+    
     public var wrappedValue: Value {
         get {
             return container.string(forKey: key) as? Value ?? defaultValue
@@ -21,6 +21,14 @@ public struct Keychain<Value> {
         set {
             set(newValue)
         }
+    }
+    
+    public init(key: String,
+                defaultValue: Value,
+                container: Keychainer = Keychainer(serviceName: "\(Keychainer.self)")) {
+        self.key = key
+        self.defaultValue = defaultValue
+        self.container = container
     }
     
     private func set(_ value: Value) {
