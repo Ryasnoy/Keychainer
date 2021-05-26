@@ -8,13 +8,13 @@
 import Foundation
 
 @propertyWrapper
-struct Keychain<Value> {
+public struct Keychain<Value> {
     
-    let key: String
-    let defaultValue: Value
-    var container = Keychainer(serviceName: "\(Keychainer.self)")
+    public let key: String
+    public let defaultValue: Value
+    public var container = Keychainer(serviceName: "\(Keychainer.self)")
 
-    var wrappedValue: Value {
+    public var wrappedValue: Value {
         get {
             return container.string(forKey: key) as? Value ?? defaultValue
         }
